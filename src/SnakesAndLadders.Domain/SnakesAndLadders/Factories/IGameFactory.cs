@@ -1,4 +1,6 @@
-﻿namespace SnakesAndLadders.Domain.SnakesAndLadders.Factories
+﻿using SnakesAndLadders.Domain.SnakesAndLadders.Models;
+
+namespace SnakesAndLadders.Domain.SnakesAndLadders.Factories
 {
     public interface IGameFactory
     {
