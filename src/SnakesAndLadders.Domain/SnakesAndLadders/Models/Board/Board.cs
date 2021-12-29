@@ -4,6 +4,6 @@ namespace SnakesAndLadders.Domain.SnakesAndLadders.Models.Board
 {
     public class Board
     {
-        public List<Cell> Cells { get; set; }
+        public Dictionary<int, Cell> Cells { get; set; }
     }
 }
