@@ -63,7 +63,7 @@ namespace SnakesAndLadders.BehaviorTest.Steps
         {
             var game = (Game)_scenarioContext["Game"];
             var winner = game.Info.Winner;
-            winner.Should().NotBeNull();
+            winner.Should().Be(1);
             var isGameFinished = game.Info.IsFinished;
             isGameFinished.Should().BeTrue();
         }
@@ -73,7 +73,7 @@ namespace SnakesAndLadders.BehaviorTest.Steps
         {
             var game = (Game)_scenarioContext["Game"];
             var winner = game.Info.Winner;
-            winner.Should().BeNull();
+            winner.Should().Be(0);
             var isGameFinished = game.Info.IsFinished;
             isGameFinished.Should().BeFalse();
         }

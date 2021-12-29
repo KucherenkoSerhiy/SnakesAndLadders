@@ -23,7 +23,9 @@ namespace SnakesAndLadders.Domain.UnitTest.SnakesAndLadders.Factories
             var expectedGameInfo = new GameInfo
             {
                 IsStarted = true,
-                IsFinished = false
+                IsFinished = false,
+                ActivePlayer = 1,
+                Winner = 0
             };
             
             var sut = this.GetSut(out var playerFactoryMock, out var boardFactoryMock);

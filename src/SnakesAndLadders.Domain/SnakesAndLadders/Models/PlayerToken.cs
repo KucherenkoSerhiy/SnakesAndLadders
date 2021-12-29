@@ -6,6 +6,5 @@ namespace SnakesAndLadders.Domain.SnakesAndLadders.Models
     {
         public string Name { get; set; }
         public int Position { get; set; }
-        public bool IsTheirTurn { get; set; }
     }
 }

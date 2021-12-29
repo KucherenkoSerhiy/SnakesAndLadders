@@ -26,7 +26,8 @@ namespace SnakesAndLadders.Domain.SnakesAndLadders.Factories.Impl
                 Info = new GameInfo
                 {
                     IsStarted = true,
-                    IsFinished = false
+                    IsFinished = false,
+                    ActivePlayer = 1
                 },
                 Players = players
             };

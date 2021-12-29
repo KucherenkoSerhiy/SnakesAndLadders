@@ -19,13 +19,10 @@ namespace SnakesAndLadders.Domain.SnakesAndLadders.Factories.Impl
                 {
                     Name = $"Player {i}",
                     Position = 1,
-                    IsTheirTurn = false
                 };
                 players.Add(player);
             }
-
-            players[0].IsTheirTurn = true;
-
+            
             return players;
         }
     }

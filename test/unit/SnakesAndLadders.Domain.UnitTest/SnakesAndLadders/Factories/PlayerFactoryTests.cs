@@ -28,7 +28,6 @@ namespace SnakesAndLadders.Domain.UnitTest.SnakesAndLadders.Factories
                 {
                     Name = "Player 1",
                     Position = 1,
-                    IsTheirTurn = true
                 }
             };
             var sut = new PlayerFactory();
@@ -44,14 +43,12 @@ namespace SnakesAndLadders.Domain.UnitTest.SnakesAndLadders.Factories
                 new()
                 {
                     Name = "Player 1",
-                    Position = 1,
-                    IsTheirTurn = true
+                    Position = 1
                 },
                 new()
                 {
                     Name = "Player 2",
-                    Position = 1,
-                    IsTheirTurn = false
+                    Position = 1
                 }
             };
             var sut = new PlayerFactory();
