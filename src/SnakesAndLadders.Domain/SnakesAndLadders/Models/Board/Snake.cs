@@ -2,6 +2,11 @@
 {
     public class Snake: Cell
     {
-        public Cell Tail { get; set; }
+        public int Tail { get; set; }
+        
+        public override void MovePlayer(PlayerToken playerToken)
+        {
+            playerToken.Position = Tail;
+        }
     }
 }

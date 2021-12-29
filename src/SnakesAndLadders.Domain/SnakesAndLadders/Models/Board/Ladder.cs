@@ -2,6 +2,11 @@
 {
     public class Ladder : Cell
     {
-        public Cell Head { get; set; }
+        public int Head { get; set; }
+        
+        public override void MovePlayer(PlayerToken playerToken)
+        {
+            playerToken.Position = Head;
+        }
     }
 }

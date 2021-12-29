@@ -1,7 +1,7 @@
 ﻿namespace SnakesAndLadders.Domain.SnakesAndLadders.Models.Board
 {
-    public class Cell
+    public abstract class Cell
     {
-        public int Position { get; set; }
+        public abstract void MovePlayer(PlayerToken playerToken);
     }
 }
