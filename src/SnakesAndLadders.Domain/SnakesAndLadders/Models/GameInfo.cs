@@ -5,6 +5,6 @@
         public bool IsStarted { get; set; }
         public bool IsFinished { get; set; }
         public int ActivePlayer { get; set; }
-        public int Winner { get; set; }
+        public string Winner { get; set; }
     }
 }

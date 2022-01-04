@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SnakesAndLadders.Domain.SnakesAndLadders.Factories.Impl;
-using SnakesAndLadders.Domain.SnakesAndLadders.Models;
 using SnakesAndLadders.Domain.SnakesAndLadders.Models.Board;
 
 namespace SnakesAndLadders.Domain.UnitTest.SnakesAndLadders.Factories
 {
-    [TestFixture]
-    [Parallelizable(ParallelScope.All)]
+    [TestClass]
     public class BoardFactoryTests
     {
         /// <summary>
@@ -23,7 +20,7 @@ namespace SnakesAndLadders.Domain.UnitTest.SnakesAndLadders.Factories
         /// </summary>
         private readonly List<int> _ladders = new() {2, 7, 8, 15, 21, 28, 36, 51, 71, 78, 87};
         
-        [Test]
+        [TestMethod]
         public void Build_ValidCase_Ok()
         {
             var sut = new BoardFactory();

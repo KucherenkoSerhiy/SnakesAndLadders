@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using SnakesAndLadders.BehaviorTest.Mocks;
 using SnakesAndLadders.Domain.SnakesAndLadders.Services;
 using TechTalk.SpecFlow;
 
@@ -12,27 +12,36 @@ namespace SnakesAndLadders.BehaviorTest.Steps
     [Scope(Feature = "Moves Are Determined By Dice Rolls")]
     public sealed class DiceSteps
     {
-        private readonly ScenarioContext _scenarioContext;
-        private readonly IDie _die;
-        private Dictionary<int, int> _rolledValues;
+        private readonly int _numberOfPlayers = 1;
         private const int TotalRolls = 10000;
+        private IDie _die;
+        private Dictionary<int, int> _rolledValues;
+        private IPlayGameDomainService _sut;
+        private readonly ServiceCollection _serviceCollection;
 
-        public DiceSteps(ScenarioContext scenarioContext, IDie die)
+        public DiceSteps()
         {
-            _scenarioContext = scenarioContext;
-            _die = die;
+            _serviceCollection = IoCSetup.SetupIoCContainer();
         }
         
         [Given(@"the game is started")]
         public void GivenTheGameIsStarted()
         {
             _rolledValues = new Dictionary<int, int>();
+            var serviceProvider = _serviceCollection.BuildServiceProvider();
+            _die = serviceProvider.GetService<IDie>();
         }
         
         [Given(@"the player rolls a (.*)")]
-        public void GivenThePlayerRollsA(int p0)
+        public void GivenThePlayerRollsA(int dieRoll)
         {
-            ScenarioContext.StepIsPending();
+            _serviceCollection.Replace(ServiceDescriptor.Scoped<IDie, DieMock>());
+            var serviceProvider = _serviceCollection.BuildServiceProvider();
+            var dieMock = (DieMock)serviceProvider.GetService<IDie>();
+            dieMock.ValueToThrow = dieRoll;
+            
+            _sut = serviceProvider.GetService<IPlayGameDomainService>();
+            _sut.Build(_numberOfPlayers);
         }
 
         [When(@"the player rolls a die")]
@@ -51,7 +60,7 @@ namespace SnakesAndLadders.BehaviorTest.Steps
         [When(@"they move their token")]
         public void WhenTheyMoveTheirToken()
         {
-            ScenarioContext.StepIsPending();
+            _sut.MakeMove();
         }
 
 
@@ -65,9 +74,13 @@ namespace SnakesAndLadders.BehaviorTest.Steps
         }
 
         [Then(@"the token should move (.*) spaces")]
-        public void ThenTheTokenShouldMoveSpaces(int p0)
+        public void ThenTheTokenShouldMoveSpaces(int spaces)
         {
-            ScenarioContext.StepIsPending();
+            var game = _sut.GetGameStatus();
+            var firstPlayerIndex = _numberOfPlayers-1;
+            var player = game.Players[firstPlayerIndex];
+            var startingPlayerPosition = 1;
+            player.Position.Should().Be(spaces+startingPlayerPosition);
         }
     }
 }

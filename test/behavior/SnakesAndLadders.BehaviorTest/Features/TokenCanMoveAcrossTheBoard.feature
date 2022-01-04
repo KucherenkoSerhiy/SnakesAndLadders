@@ -16,6 +16,13 @@ So that I can get closer to the goal
     Scenario: Move token 2 times
         Given the token is on square 1
         When the token is moved 3 spaces
+        And then it is moved 5 spaces
+        Then the token is on square 9
+
+    Scenario: Hit a Ladder
+        Given the token is on square 1
+        When the token is moved 3 spaces
         And then it is moved 4 spaces
-        Then the token is on square 8
+        Then the token is on square 31
+        Scenario Outline: A ladder is located on tile 8 and moves player to tile 31
         

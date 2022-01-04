@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SnakesAndLadders.Domain.SnakesAndLadders.Factories.Impl;
 using SnakesAndLadders.Domain.SnakesAndLadders.Models;
 
 namespace SnakesAndLadders.Domain.UnitTest.SnakesAndLadders.Factories
 {
-    [TestFixture]
-    [Parallelizable(ParallelScope.All)]
+    [TestClass]
     public class PlayerFactoryTests
     {
-        [TestCase(-1)]
-        [TestCase(0)]
+        [TestMethod]
+        [DataRow(0)]
+        [DataRow(-1)]
         public void Build_InvalidNumberOfPlayers_ThrowsArgumentException(int numberOfPlayers)
         {
             var sut = new PlayerFactory();
-            Assert.Throws<ArgumentException>(() => sut.Build(numberOfPlayers));
+            Assert.ThrowsException<ArgumentException>(() => sut.Build(numberOfPlayers));
         }
         
-        [Test]
+        [TestMethod]
         public void Build_OnePlayer_Ok()
         {
             var expectedPlayers = new List<PlayerToken>
@@ -35,7 +35,7 @@ namespace SnakesAndLadders.Domain.UnitTest.SnakesAndLadders.Factories
             players.Should().BeEquivalentTo(expectedPlayers);
         }
         
-        [Test]
+        [TestMethod]
         public void Build_TwoPlayers_Ok()
         {
             var expectedPlayers = new List<PlayerToken>

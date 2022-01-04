@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
-using NUnit.Framework;
+using Microsoft.Extensions.Logging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using SnakesAndLadders.Infrastructure.SnakesAndLadders.DomainServices;
 
 namespace SnakesAndLadders.Infrastructure.UnitTest.SnakesAndLadders.DomainServices
 {
-    [TestFixture]
-    [Parallelizable(ParallelScope.All)]
+    [TestClass]
     public class OneDie6Tests
     {
-        [Test]
+        [TestMethod]
         public void Roll_10000Times_ReturnsValuesBetween1And6()
         {
             var totalRolls = 10000;
-            var sut = new OneDie6();
+            var sut = GetSut(out _);
             var rollCounter = new Dictionary<int, int>();
 
             for (var i = 0; i < totalRolls; i++)
@@ -32,6 +33,12 @@ namespace SnakesAndLadders.Infrastructure.UnitTest.SnakesAndLadders.DomainServic
 
             for (var i = 1; i <= 6; i++)
                 rollCounter[i].Should().BeGreaterThan(0);
+        }
+
+        private static OneDie6 GetSut(out Mock<ILogger<OneDie6>> loggerMock)
+        {
+            loggerMock = new Mock<ILogger<OneDie6>>(MockBehavior.Loose);
+            return new OneDie6(loggerMock.Object);
         }
     }
 }

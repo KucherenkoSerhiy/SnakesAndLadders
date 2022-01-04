@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using NUnit.Framework;
 using SnakesAndLadders.Domain.SnakesAndLadders.Factories;
 using SnakesAndLadders.Domain.SnakesAndLadders.Factories.Impl;
 using SnakesAndLadders.Domain.SnakesAndLadders.Models;
@@ -10,11 +9,10 @@ using SnakesAndLadders.Domain.SnakesAndLadders.Models.Board;
 
 namespace SnakesAndLadders.Domain.UnitTest.SnakesAndLadders.Factories
 {
-    [TestFixture]
-    [Parallelizable(ParallelScope.All)]
+    [TestClass]
     public class GameFactoryTests
     {
-        [Test]
+        [TestMethod]
         public void Build_ValidCase_Ok()
         {
             var playerTokens = new List<PlayerToken>();
@@ -25,7 +23,7 @@ namespace SnakesAndLadders.Domain.UnitTest.SnakesAndLadders.Factories
                 IsStarted = true,
                 IsFinished = false,
                 ActivePlayer = 1,
-                Winner = 0
+                Winner = null
             };
             
             var sut = this.GetSut(out var playerFactoryMock, out var boardFactoryMock);
