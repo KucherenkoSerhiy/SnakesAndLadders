@@ -52,7 +52,7 @@ namespace SnakesAndLadders.Client.Console
 
             int numberOfPlayers;
             while (!int.TryParse(System.Console.ReadLine(), out numberOfPlayers)
-                   && numberOfPlayers is <= 0 or >= 4)
+                   || numberOfPlayers is <= 0 or >= 4)
             {
                 System.Console.WriteLine("Please enter a valid number of players (between 1 and 4)");
             }
